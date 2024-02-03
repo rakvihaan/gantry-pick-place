@@ -8,7 +8,7 @@ from math import atan2
 
 cap = cv.VideoCapture(1)
 print("Img Processing")
-model = torch.hub.load(r'E:\University\RAIS\scripts\yolo_img_p\yolov5','custom',path=r"E:\University\RAIS\scripts\yolo_img_p\yolov5\runs\train\exp\weights\last.pt",source='local', force_reload=True)
+model = torch.hub.load(r'..\yolo_obj_det\yolov5','custom',path=r"..\yolo_obj_det\yolov5\runs\train\exp\weights\last.pt",source='local', force_reload=True)
 
 model.conf = 0.85
 dot_coordinates = []
