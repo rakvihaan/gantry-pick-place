@@ -2,8 +2,10 @@
 
 A gantry robot built for automated archiving of vacuum tubes.
 
-_images_
+<img src="completed_gantry.png" width="500"/>
+<img src="end_effector.png" width="312"/>
 
+<br>
 The hardware is built using aluminum extrusions and mild steel plates for various mounts.
 Arduino Mega is used as the microcontroller with DRV8825 stepper motors drivers to drive the stepper motors.
 
