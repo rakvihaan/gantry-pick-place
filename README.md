@@ -9,7 +9,7 @@ Arduino Mega is used as the microcontroller with DRV8825 stepper motors drivers 
 
 This project also implements the application of object detection in identifying the vacuum tubes. The methodology involves training a model on annotated datasets, employing YOLO algorithm and PyTorch. Leveraging computer vision techniques, the system aims to accurately locate the vacuum tubes and the empty slots through real-time image feed.
 
-- Has a workspace of 600x500x130 mm
+- Has a workspace of 600 x 500 x 130 mm
 - Three linear axes with a linear velocity range of
   - X-axis: 90-200 mm/s
   - Y-axis: 100-210 mm/s
