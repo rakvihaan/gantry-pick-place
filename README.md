@@ -28,7 +28,7 @@ This project also implements the application of object detection in identifying 
 - Home the gantry before running any command.
 
 ## Future Improvements
-- Replacing idler pulleys with optical encoders, can be used to keep track of the position.
-- Replacing stepper motors with better motors with hugh torque at higher rpm.
-- Realtime dynamic coordinates from image processing.
-- Improve X-Axis to increase vertical workspace.
+- [ ] Replacing idler pulleys with optical encoders, can be used to keep track of the position.
+- [ ] Replacing stepper motors with better motors with hugh torque at higher rpm.
+- [ ] Realtime dynamic coordinates from image processing.
+- [ ] Improve X-Axis to increase vertical workspace.
