@@ -20,7 +20,7 @@ This project also implements the application of object detection in identifying 
 
 ## Python Scripts
 - Clone the repo.
-- Change pins and stepper motors speed and acceleration as per requirements in the [gantry.cpp].(arduino_code/gantry.cpp) file.
+- Change pins and stepper motors speed and acceleration as per requirements in the [gantry.cpp](arduino_code/gantry.cpp) file.
 - Upload the Arduino Code in the [arduino_code](arduino_code) folder.
 - run the main.py file.
 - Home the gantry before running any command.
