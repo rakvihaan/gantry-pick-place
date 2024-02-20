@@ -16,6 +16,7 @@
 | NEMA17 Motor mounts                |  4  |      |
 | Idler Pulley mounts                |  3  |      |
 | Z-Axis platform                    |  2  |      |
+| 40mm Aluminium Spacers             |  3  |      |
 | 90 deg Gantry bracket for Z-Axis   |  2  |      |
 | Gantry bracket for Z-Axis          |  2  |      |
 | 90 deg Extrusion Bracket           |  2  |      |
