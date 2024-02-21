@@ -1,0 +1,7 @@
+numpy==1.24.4
+opencv_python==4.8.1.78
+Pillow==10.1.0
+Pillow==10.2.0
+pynput==1.7.6
+pyserial==3.5
+torch==2.1.0
