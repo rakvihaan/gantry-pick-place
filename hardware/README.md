@@ -26,7 +26,7 @@
 | Stainless Steel rods 3mm (75mm)    |  2  |      |
 | Stainless Steel rods 1.2mm (100mm) |  2  |      |
 | **Electrical Components**          |     |      |
-| Stepper Motors (.2 N-cm)           |  4  |      |
+| Stepper Motors (7.2 N-cm)           |  4  |      |
 | DRV8825 Drivers                    |  4  |      |
 | Limit Switches                     |  3  |      |
 | CNC Shield                         |  1  |      |
