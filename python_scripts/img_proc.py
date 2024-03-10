@@ -28,7 +28,7 @@ filled=False
 ofx=40
 ofy=40
 
-
+#
 def getmatrix(frame):
     global cap,model,dot_coordinates,stm,ox,oy,dx,dy
     # ret, frame = cap.read()
@@ -72,7 +72,7 @@ def getmatrix(frame):
         # cv.imshow('YOLO',image)
         # cv.waitKey(1)
 
-    
+#to get tray boundary coords for calibration    
 def get_tray_bounds(frame):
     tt_count = 0
     while not tt_count == 4:
@@ -125,7 +125,7 @@ def get_tray_bounds(frame):
         print(tray_bounds)
         return tray_bounds,frame
 
-
+#useless for now
 def get_filled_slots(frame):
     global stm
     getmatrix(frame)
@@ -135,7 +135,7 @@ def get_filled_slots(frame):
     # print(temp)
     return temp
 
-
+#to get the pallet presence matrix
 def imgg(bounds):
     global editttt
     ret, image = cap.read()

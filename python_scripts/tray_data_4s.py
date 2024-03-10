@@ -1,4 +1,4 @@
-class ReadLine:
+class ReadLine:#serial communication
     def __init__(self, s):
         self.buf = bytearray()
         self.s = s
@@ -19,44 +19,65 @@ class ReadLine:
             else:
                 self.buf.extend(data)
 
-
+#initialize element for operations and storing few data
 source_trays = [[] for _ in range(4)]
+buffer_spurce_tray=[[] for _ in range(4)]
 dest_trays = [[] for _ in range(5)]
+
 
 for tray in source_trays:
 	for i in range(0,12):
 		tray.append([1]*4)
 
+for tray in buffer_spurce_tray:
+	for i in range(0,12):
+		tray.append([1]*4)
+            
 for tray in dest_trays:
 	for i in range(0,12):
 		tray.append([0]*4)
+          
 
-
-# for tray in dest_trays:
-# 	print(tray)
-# 	print("\n")
-      
-
-# tray_dest.append(tray_comp)
-# tray_dest.append(tray_inComp)
 
 # tray_coords = [(290,295),(160,295),(30,295)]
 
-source_tray_coord = [[20,81.5],
-                     [20,255.5],
-                     [320,81.5],
-                     [320,255.5]]
+source_tray_coord = [[18,88],#35 91
+                     [40,200],
+                     [346,90],
+                     [345,202]]
+# source_tray_coord = [[38,95],#35 91
+#                      [40,200],
+#                      [346,90],
+#                      [345,202]]
 
-dest_tray_coord = [[20,250],
-                     [140,250],
-                     [260,250],
-                     [380,250],
-                     [500,250]]
+dest_tray_coord = [[7,273],
+                     [127,273],
+                     [252,273],
+                     [369,273],
+                     [492,281]]
+# dest_tray_coord = [[27,280],
+#                      [149,280],
+#                      [271,280],
+#                      [389,280],
+#                      [512,280]]
 
-# # print(tray_dest[0])
-# dtt = source_trays[0]
-#             # print(dtt)
-# for col, val in enumerate(dtt):
-#     for roww, value in enumerate(val):
-#         if value == 1:
-#             print(col,roww)
+
+tray1_2_coord = [] 
+tray3_4_coord = [] 
+
+#image frame coords for each pallet
+tray1_frame_bounds = [[61, 198], [605, 190], [607, 409], [62, 420]]
+tray2_frame_bounds = [[61, -15], [608, -22], [610, 195], [67, 207]]
+tray3_frame_bounds = [[54, 206], [595, 195], [597, 412], [58, 425]]
+tray4_frame_bounds = [[50, -16], [597, -24], [598, 199], [56, 205]]
+# tray1_frame_bounds = [[99, 177], [640, 169], [645, 388], [98, 396]]
+# tray2_frame_bounds = [[95, -38], [639, -41], [639, 177], [101, 183]]
+# tray3_frame_bounds = [[104, 179], [647, 169], [649, 390], [109, 403]]
+# tray4_frame_bounds = [[100, -38], [645, -42], [647, 175], [105, 181]]
+
+tray_vis_coord = [[86,782],
+	    [86,612],
+        [565,782],
+	    [565,612]]
+
+current_position = [0,0,0,1]

@@ -7,6 +7,8 @@ import csv_functions as csv_func
 import csv
 import img_proc as imgp
 # import threading
+# pallet = tray, chances are we have used either words for the comments, but both mean the same thing
+
 
 barcode_com_port = "COM19"
 gantry_com_port = "COM3"
@@ -28,10 +30,11 @@ tt_matrix=[]
 
 last_rotation_pos = 3
 
+#to send multiple pose commands at once, useless for now(only pose commands, doesnt work for homing, end effector)
 def multi_cmd(inputCmd):
      movetoXY(inputCmd, len([char for char in inputCmd if char == ";"]))
 
-
+#to retrive com ports based on name
 def get_com_port(device_name):
 	ports = serial.tools.list_ports.comports()
 	for port, desc, hwid in sorted(ports):
@@ -39,18 +42,18 @@ def get_com_port(device_name):
 			print("{}: {}".format(port, desc))	
 			return port
           
-    
+#converts the psoe or anyother cmds into a form at the arduino expects    
 def conv_to_ard_cmd(x,y,z,end,servo):
     return "%s %s %s %s %s ;" % (str(x), str(y), str(z), str(end), str(servo))
      
-
+#sends homing cmd to arduino
 def goHome(cmd):
     cmd = "-1 -1 -1 2 %s ;" % last_rotation_pos 
     gantry_controller.write(cmd.encode('utf-8'))
     while((gantry_controller.read() != b'h')):
         pass
 
-
+#sends rotating cmd to arduino
 def rotate_gripper(rotation_pos):
     # print("rotating")
     cmd = "-1 -1 -1 9 %s ;" % rotation_pos 
@@ -59,7 +62,7 @@ def rotate_gripper(rotation_pos):
         pass
 
 
-
+#sends pose cmd to arduino
 def movetoXY(cmd,countt):
     count = 0
     # countt = 3
@@ -75,7 +78,7 @@ def movetoXY(cmd,countt):
     # update_current_pos(tray_data.current_position)
     time.sleep(0.2)
 
-
+#sends end effector state cmds
 def toggleEnd(cmd):
     if cmd == "close":
         cmd = "-1 -1 -1 0 %s ;" % last_rotation_pos 
@@ -87,7 +90,11 @@ def toggleEnd(cmd):
         pass
     # print(tempp)
 
-
+#initial sorting function
+# checks for type of sort full or based on img Proc
+# checks if the dest tray in tray_data_4s is full or if slots are empty
+# supposed to update the banner in the gui if the dest trays are full or if the operations is complete
+# a lot of room for improvement here
 def start_sorting(mode):
     global tt_matrixs
     # source_x, source_y = tray_id_to_xy(1, 0, 0)
@@ -150,12 +157,12 @@ def start_sorting(mode):
         else: 
             break
 
-
+#retuns random dept number, useful for testing
 def get_dest_tray_id():
     return random.randint(1,4)
     # return 0
 
-
+# transforms the tray's slot into x,y coordinates
 def tray_id_to_xy(tray_id,row,column,type):
     global dest_x, dest_y
 
@@ -170,7 +177,7 @@ def tray_id_to_xy(tray_id,row,column,type):
     # print(x_coord, y_coord)
     return x_coord, y_coord
 
-
+# retuns the next empty slot in the required tray
 def	get_emp_slot(tray_list):
     for row_idx, row in enumerate(tray_list):
         if 0 in row:
@@ -178,7 +185,7 @@ def	get_emp_slot(tray_list):
 			# return [col_idx, row_idx]
             return [row_idx, col_idx]
 
-
+#searchs the dummy csv database for the details of the vacuum tube 
 def search_csv_by_tt_id(csv_filename, keyword):
 # def search_department(csv_file, target_tt_id):
     # print(csv_filename, keyword)
@@ -218,7 +225,7 @@ def search_csv_by_tt_id(csv_filename, keyword):
 #                 return '0'
 
 
-
+# function at performs the single pick and place operation, has to be called from start_sorting        
 def start_sort(source_tray_id, column, row):
     global dist_x,dist_y,end_effector_stat,last_rotation_pos
     print("sorttttt")
@@ -263,11 +270,13 @@ def start_sort(source_tray_id, column, row):
 
 
 # barcode_data = ""
+# i have no idea what this is
 def moveXYZ(x,y,z):
     global last_rotation_pos
     movetoXY(conv_to_ard_cmd(x,y,z,end_effector_stat,last_rotation_pos), 1)
     # last_rotation_pos = servo
 
+#reads the barcode and rotates the end effector in attempt to read the barcode
 def read_barcode():
     global last_rotation_pos
     print("barcode")
@@ -300,7 +309,7 @@ def read_barcode():
     print(barcode_data)
     return barcode_data
 
-
+# moves the gantry to extreme ends for 10 times
 def drift_check():
     dtt = tray_data.source_trays[0]
     # print(dtt)
@@ -311,6 +320,9 @@ def drift_check():
                 # print("Source: ",source_x, source_y)
                 movetoXY(conv_to_ard_cmd(source_x, source_y, 20, open_gripper,last_rotation_pos), 1)
 
+# the sorting starts here
+# this is called from the main gui file
+# only start_sorting("full") can be called for the full pallet without img processing  
 def sorting_imgp():
     global last_rotation_pos,tt_matrix
     while True:
@@ -354,6 +366,7 @@ def toggle_end_effector():
         toggleEnd("close")
         end_effector_stat = 0
 
+# menu if this file is alone executed
 def gantry_menu():
     global last_rotation_pos,tt_matrix,end_effector_stat
     while True:

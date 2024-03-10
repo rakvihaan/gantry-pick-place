@@ -11,15 +11,10 @@ root.title("Gantry")
 root.geometry("1010x500")
 # root.configure(background='#3d3d3d')
 
-def submit_button_click():
+def submit_button_click():#currently does nothing
     x_value = x_entry.get()
     y_value = y_entry.get()
     z_value = z_entry.get()
-
-    # You can use the values of x_value, y_value, and z_value as needed
-    # print("X:", x_value)
-    # print("Y:", y_value)
-    # print("Z:", z_value)
 
     x_entry.delete(0, tk.END)
     y_entry.delete(0, tk.END)
@@ -29,14 +24,14 @@ def submit_button_click():
 
 start_col = 1
 
-def home_button_click():
+def home_button_click():#calls home func in 4source and updates gui elements
     # pass
     global canvas
     functions.goHome("home")
     functions.last_rotation_pos = 3
     canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill="#33dd2d", outline="#33dd2d")
 
-def go_button_click():
+def go_button_click():#moves the gantry to given x,y,z coords
     x_value = x_entry.get()
     y_value = y_entry.get()
     z_value = z_entry.get()
@@ -49,24 +44,20 @@ def go_button_click():
     y_entry.delete(0, tk.END)
     z_entry.delete(0, tk.END)
 
-    # x_entry.insert(0, 0)
-    # y_entry.insert(0, 0)
-    # z_entry.insert(0, 0)
-
     update_current_pos([x_value,y_value,z_value,0])
     functions.moveXYZ(x_value,y_value,z_value)
     # pass
 
 
-def toggle_button_click():
+def toggle_button_click():#toggles end effector
     functions.toggle_end_effector()
     # pass
     
-def buffer_tray_image():
+def buffer_tray_image():#for vacuum tubes image
     global gantry_tray_img
     updateTrayImage(gantry_tray_img)
 
-def updateTrayImage(gantry_tray_img):
+def updateTrayImage(gantry_tray_img):#for vacuum tubes image
     # global gantry_tray_img
     print(gantry_tray_img)
     image = cv.imread(r"tt_tray.png")
@@ -104,13 +95,13 @@ def updateTrayImage(gantry_tray_img):
 
 
 
-def start_sorting_main():
+def start_sorting_main():#starts the main sorting function
     functions.sorting_imgp()
 
-def cali_camera():
+def cali_camera():#need to call the bounds function in img_proc, add the required prompts to before
     pass
 
-def update_current_pos(pos):
+def update_current_pos(pos):#updates the current position
     global x_curr_entry,y_curr_entry,z_curr_entry
     print(pos)
 
@@ -124,11 +115,11 @@ def update_current_pos(pos):
     z_curr_entry.insert(0,pos[2])
     end_curr_entry.insert(0,pos[3])
 
-def update_status(message,bgc):
+def update_status(message,bgc):#updates the message on top
     global gantry_status_text
     gantry_status_text.config(text = message, bg = bgc)
 
-def update_patient_dets(name,age,comp,dept,ttid):
+def update_patient_dets(name,age,comp,dept,ttid):#displays the vacuum tube details
     global curr_tt_text
     temp = "{} \nName: {} \nAge: {} \nAll Tests Done: {} \nDepartment: {}".format(ttid,name,age,comp,dept)
     curr_tt_text.set(temp)
